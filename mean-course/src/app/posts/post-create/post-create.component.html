@@ -22,16 +22,14 @@
 <br>
 -->
 <!--<p>{{ newPost }}</p>  ** This is removed step 2.7.3--> 
-
-
 <mat-card>
     <form (submit) = "onAddPost(postForm)" #postForm="ngForm"> 
         <mat-form-field>
-            <input  matInput type="text" minlength="3" required name="title" #title="ngModel" ngModel>
+            <input placeholder = "Post Title" matInput type="text" minlength="3" required name="title" #title="ngModel" ngModel>
             <mat-error *ngIf="title.invalid">Please enter a Post Title</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <textarea matInput rows="4" required name="content" #content="ngModel" ngModel></textarea>
+            <textarea placeholder = "Post Content" matInput rows="4" required name="content" #content="ngModel" ngModel></textarea>
             <mat-error *ngIf="content.invalid">Please enter a post Content</mat-error>            
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Save Post</button>
