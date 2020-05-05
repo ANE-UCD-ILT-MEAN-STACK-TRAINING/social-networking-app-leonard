@@ -9,14 +9,31 @@
 
 <!-- option 2-->
 <!-- <textarea rows="6" [(ngModel)] ='enteredValue'></textarea>   this is for option 2--> 
+<!--
 <mat-card>
     <mat-form-field>
-        <input matInput type="text" [(ngModel)] = 'enteredTitle' placeholder="Post Title*">  <!-- Leo added placeholder-->
+        <input matInput type="text" [(ngModel)] = 'enteredTitle' placeholder="Post Title*"> 
     </mat-form-field>
     <mat-form-field>
-        <textarea  matInput rows="6" [(ngModel)] ='enteredContent' placeholder="Post Content*"></textarea> <!-- Leo added placeholder-->
+        <textarea  matInput rows="6" [(ngModel)] ='enteredContent' placeholder="Post Content*"></textarea> 
     </mat-form-field>
     <button mat-raised-button color = "primary" (click) = "onAddPost()" >Save Post</button>
 </mat-card>
 <br>
+-->
 <!--<p>{{ newPost }}</p>  ** This is removed step 2.7.3--> 
+
+
+<mat-card>
+    <form (submit) = "onAddPost(postForm)" #postForm="ngForm"> 
+        <mat-form-field>
+            <input  matInput type="text" minlength="3" required name="title" #title="ngModel" ngModel>
+            <mat-error *ngIf="title.invalid">Please enter a Post Title</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput rows="4" required name="content" #content="ngModel" ngModel></textarea>
+            <mat-error *ngIf="content.invalid">Please enter a post Content</mat-error>            
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Save Post</button>
+    </form>
+</mat-card>
