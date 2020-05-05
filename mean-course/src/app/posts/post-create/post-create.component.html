@@ -1,0 +1,22 @@
+
+<!--<p>firstname:<input type="text" name="fname"></p><br>-->
+ <!-- <p>The post script works</p> --> 
+<!-- <textarea rows="6" value="newPost" #postInput ></textarea><br> -->
+<!-- <button>Save Post</button> -->
+<!-- <button (click) = "onAddPost(postInput)" >Save Post</button> -->
+<!-- <p>{{ newPost }}</p> -->
+
+
+<!-- option 2-->
+<!-- <textarea rows="6" [(ngModel)] ='enteredValue'></textarea>   this is for option 2--> 
+<mat-card>
+    <mat-form-field>
+        <input matInput type="text" [(ngModel)] = 'enteredTitle' placeholder="Post Title*">  <!-- Leo added placeholder-->
+    </mat-form-field>
+    <mat-form-field>
+        <textarea  matInput rows="6" [(ngModel)] ='enteredContent' placeholder="Post Content*"></textarea> <!-- Leo added placeholder-->
+    </mat-form-field>
+    <button mat-raised-button color = "primary" (click) = "onAddPost()" >Save Post</button>
+</mat-card>
+<br>
+<!--<p>{{ newPost }}</p>  ** This is removed step 2.7.3--> 

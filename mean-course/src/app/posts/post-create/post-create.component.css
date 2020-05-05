@@ -1,0 +1,14 @@
+/*mat-card {
+    width: 80%;
+    margin: auto;
+}
+mat-form-field,
+textarea {
+    width:100%;
+}
+removed as per step 2.7.6.2
+*/
+mat-form-field,
+textarea {
+width:100%;
+}
