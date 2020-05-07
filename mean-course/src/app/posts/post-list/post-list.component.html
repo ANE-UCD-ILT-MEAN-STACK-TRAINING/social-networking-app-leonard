@@ -3,10 +3,12 @@
         <mat-expansion-panel-header>
             {{post.title}}
         </mat-expansion-panel-header>
-        <p>   {{post.content}}</p>
+        <p style="font-style: italic;">   {{post.content}}</p>
         <mat-action-row>
-            <button mat-raised-button color= "accent" >EDIT</button>
-            <button mat-raised-button color= "warn" >DELETE</button>
+<!--            <button mat-raised-button color= "accent" >EDIT</button>  -->
+<!--            <button mat-raised-button color= "warn" >DELETE</button>-->
+            <button mat-raised-button color= "accent" (click)="editPost();">EDIT</button>
+            <button mat-raised-button color= "warn" (click)="deletePost();">DELETE</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

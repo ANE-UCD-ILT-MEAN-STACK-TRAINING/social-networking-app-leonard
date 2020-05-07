@@ -22,4 +22,13 @@ export class PostListComponent implements OnInit, OnDestroy {
    ngOnDestroy() {
      this.postSubscription.unsubscribe();
    }
+
+   //Place holder for Editing the post
+   editPost() {
+       alert("editing post here");
+   }
+   //Place holder for Deleting the post
+   deletePost() {
+    alert("delete post here");
+   }
 }
