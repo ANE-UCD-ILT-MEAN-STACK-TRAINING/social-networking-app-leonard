@@ -6,3 +6,14 @@
 .info-text{
     text-align: center;
 }
+
+mat-spinner {
+    margin: auto;
+    }
+
+mat-expansion-panel-header{
+    font-size: large;
+    font-weight: 900;
+    font-family: calibri;
+}
+    

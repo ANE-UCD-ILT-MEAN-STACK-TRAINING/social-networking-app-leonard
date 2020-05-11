@@ -1,15 +1,22 @@
-<mat-accordion multi = "true" *ngIf ="posts.length > 0">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion #accordion="matAccordion" multi="true" *ngIf="posts.length > 0 && !isLoading">
+
+    <button mat-raised-button color="accent" (click)="accordion.openAll()">Expand All </button>
+    <button mat-raised-button color="accent" (click)="accordion.closeAll()">Collapse All </button>
     <mat-expansion-panel *ngFor="let post of posts">
         <mat-expansion-panel-header>
             {{post.title}}
         </mat-expansion-panel-header>
-        <p style="font-style: italic;">   {{post.content}}</p>
+        <p style="font-style: italic; color: greenyellow;"> {{post.content}}</p>
         <mat-action-row>
-<!--            <button mat-raised-button color= "accent" >EDIT</button>  -->
-<!--            <button mat-raised-button color= "warn" >DELETE</button>-->
-            <button mat-raised-button color= "accent" (click)="editPost();">EDIT</button>
-            <button mat-raised-button color= "warn" (click)="deletePost();">DELETE</button>
+            <a mat-button mat-raised-button color="accent" [routerLink]="['/edit/', post.id]">EDIT</a>
+            <!--            <button mat-raised-button color= "accent" >EDIT</button> -->
+            <button mat-raised-button color="warn" (click)="onDelete(post.id)">DELETE</button>
+            <!--            <button mat-raised-button color= "accent" (click)="editPost();">EDIT</button> -->
+            <!--            <button mat-raised-button color= "warn" (click)="deletePost();">DELETE</button> -->
         </mat-action-row>
     </mat-expansion-panel>
+    <br>
+    <button mat-raised-button color="accent" (click)="onDeleteAll();">Delete All Post</button>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf ="posts.length <= 0"> No Posts added yet!</p>
+<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading"> No Posts added yet !!</p>

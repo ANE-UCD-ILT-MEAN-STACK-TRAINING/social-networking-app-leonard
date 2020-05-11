@@ -1,6 +1,5 @@
-
 <!--<p>firstname:<input type="text" name="fname"></p><br>-->
- <!-- <p>The post script works</p> --> 
+<!-- <p>The post script works</p> -->
 <!-- <textarea rows="6" value="newPost" #postInput ></textarea><br> -->
 <!-- <button>Save Post</button> -->
 <!-- <button (click) = "onAddPost(postInput)" >Save Post</button> -->
@@ -8,7 +7,7 @@
 
 
 <!-- option 2-->
-<!-- <textarea rows="6" [(ngModel)] ='enteredValue'></textarea>   this is for option 2--> 
+<!-- <textarea rows="6" [(ngModel)] ='enteredValue'></textarea>   this is for option 2-->
 <!--
 <mat-card>
     <mat-form-field>
@@ -21,16 +20,19 @@
 </mat-card>
 <br>
 -->
-<!--<p>{{ newPost }}</p>  ** This is removed step 2.7.3--> 
+<!--<p>{{ newPost }}</p>  ** This is removed step 2.7.3-->
 <mat-card>
-    <form (submit) = "onAddPost(postForm)" #postForm="ngForm"> 
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
         <mat-form-field>
-            <input placeholder = "Post Title" matInput type="text" minlength="3" required name="title" #title="ngModel" ngModel>
+            <input placeholder="Post Title" matInput type="text" minlength="3" required name="title"
+                [ngModel]="post?.title" #title="ngModel" [focus]="focusSetting">
             <mat-error *ngIf="title.invalid">Please enter a Post Title</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <textarea placeholder = "Post Content" matInput rows="4" required name="content" #content="ngModel" ngModel></textarea>
-            <mat-error *ngIf="content.invalid">Please enter a post Content</mat-error>            
+            <textarea placeholder="Post Content" matInput rows="4" required name="content" [ngModel]="post?.content"
+                #content="ngModel"></textarea>
+            <mat-error *ngIf="content.invalid">Please enter a post Content</mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Save Post</button>
     </form>
