@@ -1,19 +1,23 @@
 :host {
-    display:block;
+    display: block;
     margin-top: 1rem;
-}
-
-.info-text{
+  }
+  
+  .info-text{
     text-align: center;
-}
-
-mat-spinner {
+  }
+  
+  mat-spinner {
     margin: auto;
-    }
+  }
 
-mat-expansion-panel-header{
-    font-size: large;
-    font-weight: 900;
-    font-family: calibri;
-}
-    
+  .post-image {
+    width: 100%;
+  }
+  
+  .post-image img {
+    width: 100%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  

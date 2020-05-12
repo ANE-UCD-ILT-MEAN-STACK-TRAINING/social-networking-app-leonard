@@ -1,4 +1,4 @@
-import { Directive, Input, EventEmitter, ElementRef, Inject, Renderer2 } from '@angular/core';
+import { Directive, Input, EventEmitter, ElementRef, Inject } from '@angular/core';
 
 @Directive({
     selector: '[focus]'
@@ -6,7 +6,7 @@ import { Directive, Input, EventEmitter, ElementRef, Inject, Renderer2 } from '@
 export class FocusDirective {
     @Input('focus') focusEvent: EventEmitter<boolean>;
 
-    constructor(@Inject(ElementRef) private element: ElementRef, private renderer: Renderer2) {
+    constructor(@Inject(ElementRef) private element: ElementRef) {
     }
 
     ngOnInit() {

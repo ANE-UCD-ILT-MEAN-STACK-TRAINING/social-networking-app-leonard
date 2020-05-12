@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const Post = require("./model/post");
 const mongoose = require("mongoose");
 const postRoutes = require('./routes/post');
+const path = require("path");
 
 mongoose
   .connect(
@@ -26,6 +27,8 @@ app.use(bodyParser.json());
 //another example showing body-parser can process other types of body other than json
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use("/images", express.static(path.join("backend/images")));
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   //* means any domains
@@ -39,5 +42,6 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use("/api/posts", postRoutes); // (May 11) correcting the place
 module.exports = app;
-app.use("/api/posts", postRoutes);

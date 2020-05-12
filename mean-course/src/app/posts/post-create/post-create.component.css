@@ -1,19 +1,28 @@
-/*mat-card {
-    width: 80%;
-    margin: auto;
+:host {
+  display: block;
+  margin-top: 1rem;
 }
+
 mat-form-field,
 textarea {
     width:100%;
 }
-removed as per step 2.7.6.2
-*/
-mat-form-field,
-textarea {
-width:100%;
-}
+
 
 mat-spinner {
     margin: auto;
+    }
+
+    Input [type="file"] {
+      Visibility: hidden;
+    }
+    
+    .image-preview {
+      height: 5rem;
+      margin: 1rem 0;
+    }
+    
+    .image-preview img {
+      height: 100%;
     }
     
