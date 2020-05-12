@@ -8,21 +8,17 @@ textarea {
     width:100%;
 }
 
-
 mat-spinner {
     margin: auto;
     }
 
-    Input [type="file"] {
-      Visibility: hidden;
-    }
-    
-    .image-preview {
+
+.image-preview {
       height: 5rem;
       margin: 1rem 0;
     }
     
-    .image-preview img {
+.image-preview img {
       height: 100%;
     }
     

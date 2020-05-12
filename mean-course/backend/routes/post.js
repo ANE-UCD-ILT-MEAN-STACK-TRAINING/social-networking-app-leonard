@@ -137,8 +137,6 @@ router.put(
     }
 );
 
-
-
 router.delete("/:id", (req, res, next) => {
     Post.deleteOne({ _id: req.params.id }).then((result) => {
         console.log(result);
