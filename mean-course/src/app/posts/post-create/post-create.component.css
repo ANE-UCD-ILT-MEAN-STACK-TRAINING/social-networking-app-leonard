@@ -12,6 +12,9 @@ mat-spinner {
     margin: auto;
     }
 
+input[type="file"] {
+      Visibility: hidden;
+}    
 
 .image-preview {
       height: 5rem;

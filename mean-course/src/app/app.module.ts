@@ -16,6 +16,8 @@ import { HeaderComponent } from './header/header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FocusDirective } from './app-focus.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { LoginComponent } from './auth/login/login.component';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { FocusDirective } from './app-focus.module';
     PostCreateComponent,
     HeaderComponent,
     PostListComponent,
+    LoginComponent,
     FocusDirective
   ],
   imports: [
@@ -37,7 +40,8 @@ import { FocusDirective } from './app-focus.module';
     MatToolbarModule,
     MatExpansionModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

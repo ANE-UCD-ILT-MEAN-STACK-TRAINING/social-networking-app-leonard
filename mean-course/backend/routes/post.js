@@ -50,29 +50,32 @@ router.post(
 );
 
 
-/*router.post("", (req, res, next) => {
-    const post = new Post({
-        title: req.body.title,
-        content: req.body.content,
-    });
-
-    post.save().then(createdPost => {
-        res.status(201).json({
-            message: "Post added successfully",
-            postId: createdPost._id
-        });
-    });
-});
-*/
-
 router.get("", (req, res, next) => {
-    Post.find().then((documents) => {
-        res.status(200).json({
-            message: "Posts fetched successfully!",
-            posts: documents,
+    const pageSize = +req.query.pagesize;
+    const currentPage = +req.query.page;
+    let fetchedPosts;
+    const postQuery = Post.find();
+
+    // if inputs are valid
+    if (pageSize && currentPage) {
+        postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+    }
+    postQuery
+        .find()
+        .then((documents) => {
+            fetchedPosts = documents;
+            return Post.count();
+        })
+        .then((count) => {
+            res.status(200).json({
+                message: "Posts fetched successfully!",
+                posts: fetchedPosts,
+                maxPosts: count
+            });
         });
-    });
 });
+
+
 
 
 router.get("/:id", (req, res, next) => {
@@ -115,9 +118,7 @@ router.put("", (req, res, next) => {
 //     });
 // });
 
-router.put(
-    "/:id",
-    multer({ storage: storage }).single("image"),
+router.put("/:id", multer({ storage: storage }).single("image"),
     (req, res, next) => {
         let imagePath = req.body.imagePath;
         if (req.file) {
@@ -130,7 +131,7 @@ router.put(
             content: req.body.content,
             imagePath: imagePath
         });
-        console.log(post);
+        // console.log(post);
         Post.updateOne({ _id: req.params.id }, post).then(result => {
             res.status(200).json({ message: "Update successful!" });
         });
