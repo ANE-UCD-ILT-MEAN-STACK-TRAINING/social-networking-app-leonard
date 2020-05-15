@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const Post = require("./model/post");
 const mongoose = require("mongoose");
 const postRoutes = require('./routes/post');
+const userRoutes = require('./routes/user');
 const path = require("path");
 
 mongoose
@@ -34,7 +35,7 @@ app.use((req, res, next) => {
   //* means any domains
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -44,4 +45,5 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/posts", postRoutes); // (May 11) correcting the place
+app.use('/api/users', userRoutes);
 module.exports = app;

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Post } from '../post.model';
 import { PostsService } from '../post.service';
 import { PageEvent } from "@angular/material/paginator";
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-post-list',
@@ -19,29 +20,39 @@ export class PostListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
 
-  private postSubscription: Subscription;
+  private postsSub: Subscription;
+  private authStatusSub: Subscription;
+  userIsAuthenticated = false;
 
-  constructor(public postsService: PostsService) { }
+  constructor(public postsService: PostsService, private authService: AuthService) { }
 
   //@Input() posts: Post[] = []
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.isLoading = true;
-    //this.posts = this.postsService.getPosts();  commenting out based on step 9.3.3
-    //.subscribe((postsReceived: Post[])=> {   changed on 9.3.3
-    this.postsService.getPosts(this.postsPerPage, this.currentPage);  //added need to call this get post message from js server
-    this.postSubscription = this.postsService
-      .getPostUpdateListener()
-      .subscribe((postData: { posts: Post[]; postCount: number }) => {
-        this.isLoading = false;
-        this.totalPosts = postData.postCount;
-        // setTimeout(() => { this.isLoading = false }, 2000);
+    this.postsService.getPosts(this.postsPerPage, 1);
+    this.postsSub = this.postsService.getPostUpdateListener()
+      .subscribe((postData: { posts: Post[], postCount: number }) => {
+        setTimeout(() => { this.isLoading = false }, 2000);
         this.posts = postData.posts;
+        this.totalPosts = postData.postCount;
+      });
+
+    this.userIsAuthenticated = this.authService.getIsAuth();
+
+    this.authStatusSub = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuthenticated = isAuthenticated;
       });
   }
+
+
+
   ngOnDestroy() {
-    this.postSubscription.unsubscribe();
+    this.postsSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
+
 
   onDelete(postId: string) {
     this.postsService.deletePost(postId)

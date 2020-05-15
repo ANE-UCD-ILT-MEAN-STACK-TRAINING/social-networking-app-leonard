@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,13 +11,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './header/header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FocusDirective } from './app-focus.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 
 @NgModule({
@@ -27,11 +29,13 @@ import { LoginComponent } from './auth/login/login.component';
     HeaderComponent,
     PostListComponent,
     LoginComponent,
+    SignupComponent,
     FocusDirective
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
@@ -43,7 +47,10 @@ import { LoginComponent } from './auth/login/login.component';
     MatProgressSpinnerModule,
     MatPaginatorModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+  }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
