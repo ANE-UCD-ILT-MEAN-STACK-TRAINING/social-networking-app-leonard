@@ -49,26 +49,28 @@ router.post("/login", (req, res, next) => {
                 });
             }
 
-            const token = jwt.sign({
-                email: fetchedUser.email,
-                userId: fetchedUser._id
-            },
-                'test_secret_key',
-                {
-                    expiresIn: '1h'
-                }
+            const token = jwt.sign(
+                { email: fetchedUser.email, userId: fetchedUser._id },
+                "secret_this_should_be_longer",
+                { expiresIn: "1h" }
             );
+            res.status(200).json({
+                token: token,
+                expiresIn: 3600,
+                userId: fetchedUser._id
+            });
+
 
             res.status(200).json({
                 token: token,
                 expiresIn: 3600
             });
-
         })
+        // this was updated due to unhandled exception
         .catch(err => {
-            return res.status(401).json({
-                message: "Authentication Failed!!!"
-            });
+            res.status(500).json({
+                error: err
+            })
         });
 });
 
