@@ -16,7 +16,7 @@ export class PostsService {
   private postsUpdated = new Subject<{ posts: Post[]; postCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) { }
-  //getPosts(){
+  // getPosts(){
   //  return [...this.posts];
   // }
   getPost(id: string) {

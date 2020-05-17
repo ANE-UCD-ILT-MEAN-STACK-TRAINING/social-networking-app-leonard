@@ -1,21 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit, OnInit, OnDestroy {
     isLoading = false;
-    constructor(public authService: AuthService) { }
-    // public focusLogin = new EventEmitter<boolean>();
+    private authStatusSub: Subscription;
+    public focusLogin = new EventEmitter<boolean>();
 
-    // Additional feature for focus
-    // ngAfterViewInit() { 
-    //     this.focusLogin.emit(true);
-    // }
+    constructor(public authService: AuthService) { }
+
+    ngAfterViewInit() {
+        this.focusLogin.emit(true);
+    }
+
+    ngOnInit() {
+        this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
+            authStatus => {
+                this.isLoading = false;
+            }
+        );
+    }
+
+    ngOnDestroy() {
+        this.authStatusSub.unsubscribe();
+    }
+
 
     onLogin(form: NgForm) {
         if (form.invalid) {

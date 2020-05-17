@@ -52,16 +52,14 @@ export class AuthService {
     constructor(private http: HttpClient, private router: Router) { }
 
     createUser(email: string, password: string) {
-        const authData: AuthData = {
-            email: email,
-            password: password
-        };
-
-        this.http.post(BACKEND_URL + "signup", authData)
-            .subscribe(response => {
-                console.log(response);
+        const authData: AuthData = { email: email, password: password };
+        return this.http.post(BACKEND_URL + "signup", authData)
+            .subscribe(() => {
+                this.router.navigate(["/"]);
+            }, error => {
+                this.authStatusListener.next(false);
             });
-        this.router.navigate(["/auth/login"]);
+
     }
 
     login(email: string, password: string) {
@@ -86,6 +84,8 @@ export class AuthService {
                     this.saveAuthData(token, expirationDate, this.userId);
                     this.router.navigate(["/"]);
                 }
+            }, error => {
+                this.authStatusListener.next(false);
             });
     }
 

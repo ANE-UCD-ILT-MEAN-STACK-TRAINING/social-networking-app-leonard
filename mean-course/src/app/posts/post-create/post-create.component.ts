@@ -1,10 +1,10 @@
-import { Component, OnInit, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostsService } from '../post.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Post } from '../post.model';
 import { mimeType } from "./mime-type.validator";
-import { FocusDirective } from 'src/app/app-focus.module';
+
 
 @Component({
   selector: 'app-post-create',
@@ -12,7 +12,6 @@ import { FocusDirective } from 'src/app/app-focus.module';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-  //constructor( public postsService : PostsService ) { }
   private mode = 'create';
   private postId: string;
   post: Post;
@@ -20,7 +19,10 @@ export class PostCreateComponent implements OnInit {
   form: FormGroup;
   imagePreview: string;
 
+
   constructor(public postsService: PostsService, public route: ActivatedRoute) { }
+
+
 
   ngOnInit() {
 
@@ -64,7 +66,6 @@ export class PostCreateComponent implements OnInit {
     });
 
   }
-
 
   onSavePost() {
     if (this.form.invalid) {
