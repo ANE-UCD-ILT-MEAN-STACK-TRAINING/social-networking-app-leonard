@@ -8,8 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<ErrorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { message: string }) { }
+  constructor(private dialogRef: MatDialogRef<ErrorComponent>, @Inject(MAT_DIALOG_DATA) public data: { message: string }) { }
   ngOnInit(): void {
   }
 
