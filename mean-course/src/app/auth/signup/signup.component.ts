@@ -9,12 +9,11 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent implements AfterViewInit {
     isLoading = false;
-
-    public focusSetting = new EventEmitter<boolean>();
     constructor(public authService: AuthService) { }
-
-    ngAfterViewInit() { // Additional feature for focus
-        this.focusSetting.emit(true);
+    public focusSignup = new EventEmitter<boolean>();
+    // Additional feature for focus
+    ngAfterViewInit() {
+        this.focusSignup.emit(true);
     }
 
     onSignup(form: NgForm) {

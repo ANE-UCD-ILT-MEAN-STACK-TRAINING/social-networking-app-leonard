@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const Post = require("./model/post");
 const mongoose = require("mongoose");
 const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
@@ -10,10 +9,10 @@ const path = require("path");
 mongoose
   .connect(
     //1) for local
-    // "mongodb://localhost:27017/MyPosts?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false"
+    "mongodb://localhost:27017/MyPosts?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false"
 
     //2) for cloud
-    "mongodb+srv://lland0504:y4TkSHizbbwabct@cluster0-muikb.mongodb.net/MyPosts"
+    //"mongodb+srv://lland0504:<password>@cluster0-muikb.mongodb.net/MyPosts"
   )
   .then(() => {
     console.log("Connected to database!");

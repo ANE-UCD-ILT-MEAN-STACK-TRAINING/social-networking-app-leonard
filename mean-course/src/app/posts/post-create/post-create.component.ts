@@ -4,13 +4,14 @@ import { PostsService } from '../post.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Post } from '../post.model';
 import { mimeType } from "./mime-type.validator";
+import { FocusDirective } from 'src/app/app-focus.module';
 
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.css']
 })
-export class PostCreateComponent implements OnInit, AfterViewInit {
+export class PostCreateComponent implements OnInit {
   //constructor( public postsService : PostsService ) { }
   private mode = 'create';
   private postId: string;
@@ -18,12 +19,8 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
   isLoading: boolean;
   form: FormGroup;
   imagePreview: string;
-  filePicker = '';
 
-  public focusSetting = new EventEmitter<boolean>();
-
-  constructor(public postsService: PostsService,
-    public route: ActivatedRoute) { }
+  constructor(public postsService: PostsService, public route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -32,7 +29,6 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
       content: new FormControl(null, { validators: [Validators.required] }),
       image: new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] })
     });
-
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("postId")) {
@@ -69,9 +65,6 @@ export class PostCreateComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit() { // Additional feature for focus
-    this.focusSetting.emit(true);
-  }
 
   onSavePost() {
     if (this.form.invalid) {

@@ -3,7 +3,7 @@
     <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
         <mat-form-field>
             <input matInput type="text" ngModel name="email" placeholder="Enter the User ID" #emailInput="ngModel"
-                required [focus]="focusSetting">
+                required>
             <mat-error *ngIf="emailInput.invalid">Enter a valid email</mat-error>
         </mat-form-field>
         <mat-form-field>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
@@ -7,14 +7,15 @@ import { AuthService } from '../auth.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent {
     isLoading = false;
     constructor(public authService: AuthService) { }
-    public focusSetting = new EventEmitter<boolean>();
+    // public focusLogin = new EventEmitter<boolean>();
 
-    ngAfterViewInit() { // Additional feature for focus
-        this.focusSetting.emit(true);
-    }
+    // Additional feature for focus
+    // ngAfterViewInit() { 
+    //     this.focusLogin.emit(true);
+    // }
 
     onLogin(form: NgForm) {
         if (form.invalid) {
